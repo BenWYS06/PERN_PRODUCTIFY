@@ -39,6 +39,11 @@ export const upsertUser = async (data: NewUser) => {
   return user;
 };
 
+export const createProduct = async (data: NewProduct) => {
+  const [product] = await db.insert(products).values(data).returning();
+  return product;
+};
+
 export const getAllProducts = async () => {
   return db.query.products.findMany({
     with: { users: true },
