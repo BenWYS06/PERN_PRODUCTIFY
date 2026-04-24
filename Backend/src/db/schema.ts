@@ -42,7 +42,7 @@ export const usersRelations = relations(users, ({ many }) => ({
 }));
 
 export const productsRelations = relations(products, ({ one, many }) => ({
-  users: one(users, { fields: [products.userId], references: [users.id] }),
+  user: one(users, { fields: [products.userId], references: [users.id] }),
   comments: many(comments),
 }));
 
@@ -51,7 +51,7 @@ export const commentsRelations = relations(comments, ({ one }) => ({
     fields: [comments.productId],
     references: [products.id],
   }),
-  users: one(users, { fields: [comments.userId], references: [users.id] }),
+  user: one(users, { fields: [comments.userId], references: [users.id] }),
 }));
 
 export type User = typeof users.$inferSelect;
