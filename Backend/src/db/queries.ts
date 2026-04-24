@@ -46,7 +46,7 @@ export const createProduct = async (data: NewProduct) => {
 
 export const getAllProducts = async () => {
   return db.query.products.findMany({
-    with: { users: true },
+    with: { user: true },
     orderBy: (products, { desc }) => [desc(products.createdAt)],
   });
 };
@@ -55,9 +55,9 @@ export const getProductById = async (id: string) => {
   return db.query.products.findFirst({
     where: eq(products.id, id),
     with: {
-      users: true,
+      user: true,
       comments: {
-        with: { users: true },
+        with: { user: true },
         orderBy: (comments, { desc }) => [desc(comments.createdAt)],
       },
     },
@@ -67,7 +67,7 @@ export const getProductById = async (id: string) => {
 export const getProductByUserId = async (userId: string) => {
   return db.query.products.findMany({
     where: eq(products.userId, userId),
-    with: { users: true },
+    with: { user: true },
     orderBy: (products, { desc }) => [desc(products.createdAt)],
   });
 };
@@ -115,6 +115,6 @@ export const deleteComment = async (id: string) => {
 export const getCommentById = async (id: string) => {
   return db.query.comments.findFirst({
     where: eq(comments.id, id),
-    with: { users: true },
+    with: { user: true },
   });
 };
